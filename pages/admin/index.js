@@ -1,5 +1,5 @@
 import Layout from '../../component/Layout'
-import Admin from '../../component/auth/Admin'
+import Admin from '../../component/auth/admin'
 import Link from 'next/link'
 const index = () => <Layout>
     <Admin>

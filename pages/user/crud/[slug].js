@@ -1,5 +1,5 @@
 import Layout from '../../../component/Layout'
-import Private from '../../../component/auth/Private'
+import Private from '../../../component/auth/private'
 import BlogUpdate from '../../../component/crud/BlogUpdate'
 
 const UpdateBlog = () => <Layout>

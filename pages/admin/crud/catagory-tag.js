@@ -1,5 +1,5 @@
 import Layout from '../../../component/Layout'
-import Admin from '../../../component/auth/Admin'
+import Admin from '../../../component/auth/admin'
 import Catagory from '../../../component/crud/catagory'
 import Tag from '../../../component/crud/tag'
 
@@ -12,11 +12,11 @@ const CatagoryTag = () => <Layout>
                 </div>
                 <div className="col-md-6">
                     <p>Catagories</p>
-                    <Catagory/>
+                    <Catagory />
                 </div>
                 <div className="col-md-6">
                     <p>Tags</p>
-                    <Tag/>
+                    <Tag />
                 </div>
             </div>
         </div>

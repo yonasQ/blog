@@ -1,5 +1,5 @@
 import Layout from '../../../component/Layout'
-import Admin from '../../../component/auth/Admin'
+import Admin from '../../../component/auth/admin'
 import BlogsRead from '../../../component/crud/BlogsRead'
 
 const Blog = () => <Layout>

@@ -4,14 +4,14 @@ import Link from 'next/link';
 
 const index = () => <Layout>
     <Private>
-     <div className="container-fluid">
-         <div className="row">
+        <div className="container-fluid">
+            <div className="row">
                 <div className="col-md-12 pt-5 pb-5">
                     <h1>User dashboard</h1>
                 </div>
                 <div className="col-md-4">
                     <ul className="list-group">
-                       
+
                         <li className="list-group-item">
                             <a href="/user/crud/blog" >Create Blog</a>
                         </li>
@@ -31,8 +31,8 @@ const index = () => <Layout>
                 </div>
                 <div className="col-md-8">rigth</div>
 
-         </div>
-     </div>
+            </div>
+        </div>
     </Private>
 </Layout>
 
