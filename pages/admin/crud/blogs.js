@@ -9,7 +9,7 @@ const Blog = () => <Layout>
                 <div className="col-md-12 pt-5 pb-5">
                     <h1>Manage Blogs</h1>
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-12 pb-5">
                     <BlogsRead />
                 </div>
 

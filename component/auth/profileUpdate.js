@@ -76,7 +76,7 @@ const ProfileUpdate = () => {
     const updateProfileForm = () => {
         return <form onSubmit={handleSubmit}>
             <div className="form-group">
-                <label className="text-muted">Profille Photo</label>
+                <label className="text-muted">Profile Photo</label>
                 <br />
                 <label className="btn btn-outline-info">
                     Select Photo

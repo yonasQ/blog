@@ -10,10 +10,10 @@ import Card from '../../component/blog/Card'
 const Tag = ({ tag, blogs, query }) => {
     const head = () => (
         <Head>
-            <title>{tag.name} | {APP_NAME}</title>
+            <title>{tag?tag.name:''} | {APP_NAME}</title>
             {/* <meta name="description" content="programming blogs with react node next" /> */}
             <link rel="canonical" href={`${DOMAIN}/tags/${query.slug}`} />
-            <meta property="og:title" content={`${tag.name} | ${APP_NAME}`} />
+            <meta property="og:title" content={`${tag?tag.name:''} | ${APP_NAME}`} />
             {/* <meta property="og:description" content="programming blogs with react node next" /> */}
             <meta property="og:type" content="website" />
             <link property="og:url" href={`${DOMAIN}/tags/${query.slug}`} />
@@ -34,10 +34,10 @@ const Tag = ({ tag, blogs, query }) => {
                         <header>
                             <div className="col-md-12 pt-3">
                                 <h1 className="display-4 font-weight-bold" style={{ textTransform: 'capitalize' }}>
-                                    {tag.name}
+                                    {tag?tag.name:''}
 
                                 </h1>
-                                {blogs.map((blog, i) => {
+                                {blogs && blogs.map((blog, i) => {
                                     return <article key={i}>
                                         <Card blog={blog} />
                                         <hr />

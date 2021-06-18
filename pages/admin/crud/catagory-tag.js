@@ -6,7 +6,7 @@ import Tag from '../../../component/crud/tag'
 const CatagoryTag = () => <Layout>
     <Admin>
         <div className="container-fluid">
-            <div className="row">
+            <div className="row pb-5">
                 <div className="col-md-12 pt-5 pb-5">
                     <h1>Manage Catagories and Tags</h1>
                 </div>

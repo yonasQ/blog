@@ -8,12 +8,13 @@ import { API, DOMAIN, APP_NAME } from '../../config'
 import { getCatagory } from '../../actions/catagory'
 import Card from '../../component/blog/Card'
 const Catagory = ({ catagory, blogs, query }) => {
+
     const head = () => (
         <Head>
-            <title>{catagory.name} | {APP_NAME}</title>
+            <title>{catagory?catagory.name:''} | {APP_NAME}</title>
             {/* <meta name="description" content="programming blogs with react node next" /> */}
             <link rel="canonical" href={`${DOMAIN}/catagories/${query.slug}`} />
-            <meta property="og:title" content={`${catagory.name} | ${APP_NAME}`} />
+            <meta property="og:title" content={`${ catagory?catagory.name:''} | ${APP_NAME}`} />
             {/* <meta property="og:description" content="programming blogs with react node next" /> */}
             <meta property="og:type" content="website" />
             <link property="og:url" href={`${DOMAIN}/catagories/${query.slug}`} />
@@ -34,10 +35,10 @@ const Catagory = ({ catagory, blogs, query }) => {
                         <header>
                             <div className="col-md-12 pt-3">
                                 <h1 className="display-4 font-weight-bold" style={{ textTransform: 'capitalize' }}>
-                                    {catagory.name}
+                                    { catagory?catagory.name:''}
 
                                 </h1>
-                                {blogs.map((blog, i) => {
+                                {blogs && blogs.map((blog, i) => {
                                     return <article key={i}>
                                         <Card blog={blog} />
                                         <hr />
@@ -51,8 +52,8 @@ const Catagory = ({ catagory, blogs, query }) => {
         </React.Fragment>
     )
 }
-Catagory.getInitialProps = ({ query }) => {
-    return getCatagory(query.slug)
+Catagory.getInitialProps = async({ query }) => {
+    return await getCatagory(query.slug)
         .then(data => {
             if (data.err) {
                 console.log(data.err)
@@ -66,4 +67,5 @@ Catagory.getInitialProps = ({ query }) => {
             }
         })
 }
+
 export default Catagory

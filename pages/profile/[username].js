@@ -10,11 +10,11 @@ import ContactForm from '../../component/form/contactForm'
 const UserProfile = ({ user, blogs,query }) => {
     const head = () => (
         <Head>
-            <title>{user.username} | {APP_NAME}</title>
-            <meta name="description" content={`Blogs By ${user.username}`} />
+            <title>{query.username} | {APP_NAME}</title>
+            <meta name="description" content={`Blogs By ${query.username}`} />
             <link rel="canonical" href={`${DOMAIN}/profile/${query.username}`} />
             <meta property="og:title" content={`${query.username} | ${APP_NAME}`} />
-            <meta property="og:description" content={`Blogs By ${user.username}`} />
+            <meta property="og:description" content={`Blogs By ${query.username}`} />
             <meta property="og:type" content="website" />
             <link property="og:url" href={`${DOMAIN}/profile/${query.username}`} />
             <link property="og:site_name" href={`${APP_NAME}`} />
@@ -25,7 +25,7 @@ const UserProfile = ({ user, blogs,query }) => {
         </Head>
     )
     const showBlogs = () => {
-        return blogs.map((blog, i) => {
+        return blogs && blogs.map((blog, i) => {
             return <div className="mt-4 mb-4">
                 <Link href={`/blogs/${blog.slug}`}><a className="lead">{blog.title}</a></Link>
             </div>
@@ -34,7 +34,7 @@ const UserProfile = ({ user, blogs,query }) => {
     return (
         <React.Fragment>
             {head()}
-            <Layout>
+           {user && <Layout>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">
@@ -77,7 +77,7 @@ const UserProfile = ({ user, blogs,query }) => {
                         </div>
                     </div>
                 </div>
-            </Layout>
+            </Layout>}
         </React.Fragment>
     )
 }

@@ -9,7 +9,7 @@ const UpdateBlog = () => <Layout>
                 <div className="col-md-12 pt-5 pb-5">
                     <h1>Update blog</h1>
                 </div>
-                <div className="col-md-12">
+                <div className="col-md-12 pb-5">
                     <BlogUpdate />
                 </div>
 

@@ -10,8 +10,9 @@ import { API, DOMAIN, APP_NAME } from '../../config'
 import DisqusThread from '../../component/DisqusThread'
 
 const SingleBlog = ({ blog, query }) => {
-    const head = () => (
-        <Head>
+    const head = () => 
+       { 
+         return  blog && <Head>
             <title>{blog.title} | {APP_NAME}</title>
             <meta name="description" content={blog.mdesc} />
             <link rel="canonical" href={`${DOMAIN}/blogs/${query.slug}`} />
@@ -25,7 +26,8 @@ const SingleBlog = ({ blog, query }) => {
             <link property="og:image:type" href={`image/jpg`} />
 
         </Head>
-    )
+    }
+    
     const [RelatedBlogs, setRelatedBlogs] = useState([])
     const loadRelatedBlogs = () => {
         const { _id, catagories } = blog
@@ -43,14 +45,14 @@ const SingleBlog = ({ blog, query }) => {
         loadRelatedBlogs()
     }, [])
     const blogCatagories = () => {
-        return blog.catagories.map((c, i) => (
+        return blog && blog.catagories.map((c, i) => (
             <Link key={i} href={`/catagories/${c.slug}`}>
                 <a className="btn btn-primary ml-1 mr-1 mt-3">{c.name}</a>
             </Link>
         ))
     }
     const blogTags = () => {
-        return blog.tags.map((t, i) => (
+        return blog && blog.tags.map((t, i) => (
             <Link key={i} href={`/tags/${t.slug}`}>
                 <a className="btn btn-outline-primary ml-1 mr-1 mt-3">{t.name}</a>
             </Link>
@@ -78,7 +80,7 @@ const disqusComment = ()=>{
     return (
         <React.Fragment>
             {head()}
-            <Layout>
+            {blog && <Layout>
                 <main>
                     <article>
                         <div className="container-fluid">
@@ -125,7 +127,7 @@ const disqusComment = ()=>{
                         </div>
                     </article>
                 </main>
-            </Layout>
+            </Layout>}
         </React.Fragment >
     )
 }
