@@ -13,4 +13,4 @@ const Admin = ({ children }) => {
     }, []);
     return <React.Fragment>{children}</React.Fragment>;
 };
-export default Admin;
+export default Admin 
