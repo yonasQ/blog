@@ -51,7 +51,7 @@ const Blogs = ({ blogs, catagories, tags, totalBlogs, blogsLimit, blogsSkip, rou
     }
 
     const showAllBlogs = () => {
-        return blogs.map((blog, i) => {
+        return blogs && blogs.map((blog, i) => {
             return <article key={i}>
                 <Card blog={blog} />
                 <hr />
@@ -67,7 +67,7 @@ const Blogs = ({ blogs, catagories, tags, totalBlogs, blogsLimit, blogsSkip, rou
         })
     }
     const showAllCatagories = () => {
-        return catagories.map((catagory, i) => {
+        return catagories && catagories.map((catagory, i) => {
             return <Link key={i} href={`/catagories/${catagory.slug}`}>
                 <a className="btn btn-primary ml-1 mr-1 mt-3">
                     {catagory.name}
@@ -76,7 +76,7 @@ const Blogs = ({ blogs, catagories, tags, totalBlogs, blogsLimit, blogsSkip, rou
         })
     }
     const showAllTags = () => {
-        return tags.map((tag, i) => {
+        return tags && tags.map((tag, i) => {
             return <Link key={i} href={`/tags/${tag.slug}`}>
                 <a className="btn btn-outline-primary ml-1 mr-1 mt-3">
                     {tag.name}
