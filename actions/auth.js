@@ -5,7 +5,7 @@ import { API } from '../config'
 
 export const userSessionExpired = response => {
     if (response.status == 401) {
-       console.log('1')
+     
         signout(() => {
             
             Router.push({
@@ -18,7 +18,7 @@ export const userSessionExpired = response => {
         })
     }
     else {
-        console.log('3')
+     
         return;
     }
 }

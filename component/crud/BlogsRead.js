@@ -53,9 +53,8 @@ const BlogsRead = ({ username }) => {
             </Link>
         }
         if (isAuth && isAuth().role === 1) {
-            return <Link href={`/admin/crud/${blog.slug}`}>
-                <a className="btn btn-sm btn-warning">Update</a>
-            </Link>
+            return <a href={`/admin/crud/${blog.slug}`} className="btn btn-sm btn-warning">Update</a>
+            
         }
     }
     const showAllBlogs = () => {

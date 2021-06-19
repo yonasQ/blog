@@ -10,15 +10,16 @@ import { singleBlog, updateBlog } from '../../actions/blog'
 import { QuillModules, QuillFormats } from '../../helpers/quill'
 import { API } from '../../config'
 import { default as FormData } from "form-data";
-import { Alert } from 'reactstrap'
-
+import { Alert, Spinner } from 'reactstrap'
 const BlogUpdate = ({ router }) => {
     const [Body, setBody] = useState('')
     const [Value, setValue] = useState({
         title: '',
         error: '',
         formData: '',
-        success: ''
+        success: '',
+        loading:false,
+        contentReady:false
     })
     const [blog, setblog] = useState({})
     const [Catagories, setCatagories] = useState([])
@@ -34,7 +35,7 @@ const BlogUpdate = ({ router }) => {
     }, [router])
     const [visible, setVisible] = useState(true);
     
-    const { title, error, success, formData } = Value;
+    const { title, error, success, formData,loading,contentReady } = Value;
     const onDismiss = () => {
         if(error){setVisible(false)}
         else {
@@ -56,7 +57,7 @@ const BlogUpdate = ({ router }) => {
                     }
                     else {
                         setblog(data.blog)
-                        setValue({ ...Value, title: !data.blog ? '' : data.blog.title })
+                        setValue({ ...Value, title: !data.blog ? '' : data.blog.title,contentReady:true })
                         setBody(!data.blog ? '' : data.blog.body)
                         setChecked(data.blog.tags.map(t => { return t._id }))
                         setCheckedCatagories(data.blog.catagories.map(c => { return c._id }))
@@ -162,17 +163,19 @@ const BlogUpdate = ({ router }) => {
     }
     const editBlog = (e) => {
         e.preventDefault()
+        setValue({ ...Value, loading: true })
 
         updateBlog(formData, token, router.query.slug)
             .then(data => {
 
                 if (data.err) {
                     setVisible(true)
-                    setValue({ ...Value, success: '', error: data.err })
+                    setValue({ ...Value, success: '', error: data.err, loading: false })
                 }
                 else {
                     setVisible(true)
-                    setValue({ ...Value, error: '', success: `Blog titled "${data.response.title}" is successfully updated` })
+                    console.log(data)
+                    setValue({ ...Value, error: '', loading: false, success: `Blog titled "${data.response.title}" is successfully updated` })
                 }
             })
     }
@@ -187,7 +190,7 @@ const BlogUpdate = ({ router }) => {
                 <div className="form-group">
                     <ReactQuill modules={QuillModules} formats={QuillFormats} value={Body} placeholder="what's on your mind" onChange={handleBody} />
                 </div>
-                <button className='btn btn-primary' type="submit">Update</button>
+                <button className='btn btn-primary' type="submit">Update{loading && <Spinner size='sm' className="ml-1" color="light" />}</button>
             </form>
         );
     };
@@ -212,7 +215,8 @@ const BlogUpdate = ({ router }) => {
                         {displaySuccess()}
                     </div>
                 </div>
-                <div className="row">
+                {contentReady?
+                    <div className="row">
                     <div className="col-md-8">
                         {updateBlogForm()}
                         {
@@ -253,6 +257,8 @@ const BlogUpdate = ({ router }) => {
                         </div>
                     </div>
                 </div>
+                    : <Spinner size="lg" style={{display:'block'}}className="mx-auto" color="primary" />
+                }
             </div>
         </React.Fragment>
     )

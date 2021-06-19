@@ -9,7 +9,7 @@ import { getCatagories } from '../../actions/catagory'
 import { getTags } from '../../actions/tag'
 import { createBlog } from '../../actions/blog'
 import { QuillModules, QuillFormats } from '../../helpers/quill'
-import { Alert } from 'reactstrap'
+import { Alert,Spinner } from 'reactstrap'
 
 const BlogCreate = ({ router }) => {
     const blogFromLS = () => {
@@ -27,14 +27,15 @@ const BlogCreate = ({ router }) => {
     const [Tags, setTags] = useState([])
     const [Body, setBody] = useState(blogFromLS);
     const [visible, setVisible] = useState(true);
-    
+
     const [Value, setValue] = useState({
         title: '',
         err: '',
         sizeError: '',
         success: '',
         formData: '',
-        hidePublishButton: false
+        hidePublishButton: false,
+        loading:false
     })
 
     const [Checked, setChecked] = useState([])
@@ -44,7 +45,7 @@ const BlogCreate = ({ router }) => {
         initCatagories()
         initTags()
     }, [router])
-    const { title, err, sizeError, success, formData, hidePublishButton } = Value;
+    const { title, err, sizeError, success, formData, hidePublishButton ,loading} = Value;
     const onDismiss = () => {
         setVisible(false)
         if (err) { setVisible(false) }
@@ -144,17 +145,22 @@ const BlogCreate = ({ router }) => {
     const publishBlog = e => {
         e.preventDefault()
         const token = getCookie('token')
+        setValue({ ...Value, loading: true })
+
         createBlog(formData, token)
             .then(data => {
 
                 if (data.err) {
                     setVisible(true)
-                    setValue({ ...Value, err: data.err, success: '' })
+                    setValue({ ...Value, err: data.err, success: '', loading: false })
                 }
                 else {
                     setVisible(true)
-                    setValue({ ...Value, err: false, success: `A new blog titled "${data.result.title}" is created` })
+                    setValue({ ...Value, err: false, success: `A new blog titled "${data.result.title}" is created`, loading: false })
                     setBody('')
+                    if (typeof window != 'undefined') {
+                        localStorage.setItem('blog', JSON.stringify(Body))
+                    }
                 }
             })
     }
@@ -180,7 +186,7 @@ const BlogCreate = ({ router }) => {
                 <div className="form-group">
                     <ReactQuill modules={QuillModules} formats={QuillFormats} value={Body} placeholder="what's on your mind" onChange={handleBody} />
                 </div>
-                <button className='btn btn-primary' type="submit">Publish</button>
+                <button className='btn btn-primary' type="submit">Publish{loading && <Spinner size='sm' className="ml-1" color="light" />}</button>
             </form>
         );
     };
