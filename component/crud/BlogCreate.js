@@ -4,7 +4,7 @@ import { withRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { getCookie, isAuth } from '../../actions/auth'
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
-import '../../node_modules/react-quill/dist/quill.snow.css'
+
 import { getCatagories } from '../../actions/catagory'
 import { getTags } from '../../actions/tag'
 import { createBlog } from '../../actions/blog'

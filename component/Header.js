@@ -13,7 +13,7 @@ import {
     NavLink,
 
 } from 'reactstrap';
-import '../node_modules/nprogress/nprogress.css'
+
 import { signout, isAuth } from '../actions/auth';
 import Router from 'next/router';
 import Search from './blog/search';
