@@ -1,8 +1,6 @@
-import getConfig from 'next/config'
-const { publicRuntimeConfig } = getConfig()
+export const API = process.env.NEXT_PUBLIC_PRODUCTION ? process.env.NEXT_PUBLIC_API_PRODUCTION : process.env.NEXT_PUBLIC_API_DEVELOPMENT;
+export const DOMAIN = process.env.NEXT_PUBLIC_PRODUCTION ? process.env.NEXT_PUBLIC_DOMAIN_PRODUCTION : process.env.NEXT_PUBLIC_DOMAIN_DEVELOPMENT ;
+export const APP_NAME = process.env.NEXT_PUBLIC_APP_NAME;
+export const DISQUS_SHORTNAME = process.env.NEXT_PUBLIC_DISQUS_SHORTNAME;
 
-export const API = publicRuntimeConfig.API;
-export const DOMAIN = publicRuntimeConfig.DOMAIN ;
-export const APP_NAME = publicRuntimeConfig.APP_NAME;
-export const DISQUS_SHORTNAME = publicRuntimeConfig.DISQUS_SHORTNAME;
 
